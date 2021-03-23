@@ -1,0 +1,16 @@
+zookeeper-server-start.bat d:\BACKUP\Kafka\kafka_2.13-2.7.0\config\zookeeper.properties # inicia o zookeeper
+kafka-server-start.bat d:\BACKUP\Kafka\kafka_2.13-2.7.0\config\server.properties # inicia o servidor kafka
+
+kafka-topics.bat --bootstrap-server localhost:9092 --list # lista todos os tópicos disponíveis
+kafka-topics.bat --bootstrap-server localhost:9092 --create --topic teste --partitions N # cria um novo tópico com N partições
+kafka-topics.bat --bootstrap-server localhost:9092 --describe --topic teste  # detalha informações do tópico
+kafka-topics.bat --bootstrap-server localhost:9092 --alter --topic teste --partitions N # altera o tópico para possuir N partições
+kafka-topics.bat --bootstrap-server localhost:9092 --delete --topic teste # exclui um tópico específico
+
+kafka-console-producer --broker-list localhost:9092 --topic teste # produtor de mensagens em uma lista de servidores kafka para um tópico específico
+kafka-console-producer --broker-list localhost:9092 --topic teste --property parse.key=true --property key.separator=, # produtor com propriedades para parse de chave-valor e define separador com vírgula
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic teste --from-beginning # consumidor mensagens em um servidor kafka de um tópico específico, desde o início
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic teste --group grupo1 # consumidor mensagens em grupo: se um consumer de um grupo recebe uma mensagem, os outros consumers deste mesmo grupo não recebem
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic teste --group grupo1 --property print.key=true --property key.separator=,  # consumidor com propriedades para exibir chave e define separador com vírgula
+
