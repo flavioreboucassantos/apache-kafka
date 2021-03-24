@@ -5,7 +5,7 @@ kafka-server-start.bat d:\BACKUP\Kafka\kafka_2.13-2.7.0\config\server2.propertie
 kafka-topics.bat --bootstrap-server localhost:9092 --list # lista todos os tópicos disponíveis
 kafka-topics.bat --bootstrap-server localhost:9092 --create --topic teste --partitions N # cria um novo tópico com N partições
 kafka-topics.bat --bootstrap-server localhost:9092 --create --topic teste --partitions N --replication-factor N # cria um novo tópico com N partições e N replicações
-kafka-topics.bat --bootstrap-server localhost:9092 --describe --topic teste # detalha informaç--replication-factorões do tópico
+kafka-topics.bat --bootstrap-server localhost:9092 --describe --topic teste # detalha informações do tópico
 kafka-topics.bat --bootstrap-server localhost:9092 --alter --topic teste --partitions N # altera o tópico para possuir N partições
 kafka-topics.bat --bootstrap-server localhost:9092 --delete --topic teste # exclui um tópico específico
 
