@@ -1,21 +1,22 @@
-zookeeper-server-start.bat d:\BACKUP\Kafka\kafka_2.13-2.7.0\config\zookeeper.properties # inicia o zookeeper
-kafka-server-start.bat d:\BACKUP\Kafka\kafka_2.13-2.7.0\config\server.properties # inicia o servidor kafka
-kafka-server-start.bat d:\BACKUP\Kafka\kafka_2.13-2.7.0\config\server2.properties # inicia o servidor kafka 2
+zookeeper-server-start d:\BACKUP\Kafka\kafka_2.13-2.7.0\config\zookeeper.properties # inicia o zookeeper
+kafka-server-start d:\BACKUP\Kafka\kafka_2.13-2.7.0\config\server.properties # inicia o servidor kafka
+kafka-server-start d:\BACKUP\Kafka\kafka_2.13-2.7.0\config\server2.properties # inicia o servidor kafka 2
 
-kafka-topics.bat --bootstrap-server localhost:9092 --list # lista todos os tópicos disponíveis
-kafka-topics.bat --bootstrap-server localhost:9092 --create --topic teste --partitions N # cria um novo tópico com N partições
-kafka-topics.bat --bootstrap-server localhost:9092 --create --topic teste --partitions N --replication-factor N # cria um novo tópico com N partições e N replicações
-kafka-topics.bat --bootstrap-server localhost:9092 --describe --topic teste # detalha informações do tópico
-kafka-topics.bat --bootstrap-server localhost:9092 --alter --topic teste --partitions N # altera o tópico para possuir N partições
-kafka-topics.bat --bootstrap-server localhost:9092 --delete --topic teste # exclui um tópico específico
+kafka-topics --bootstrap-server localhost:9092 --list # lista todos os tópicos disponíveis
+kafka-topics --bootstrap-server localhost:9092 --create --topic teste --partitions N # cria um novo tópico com N partições
+kafka-topics --bootstrap-server localhost:9092 --create --topic teste --partitions N --replication-factor N # cria um novo tópico com N partições e N replicações
+kafka-topics --bootstrap-server localhost:9092 --describe --topic teste # detalha informações do tópico
+kafka-topics --bootstrap-server localhost:9092 --alter --topic teste --partitions N # altera o tópico para possuir N partições
+kafka-topics --bootstrap-server localhost:9092 --delete --topic teste # exclui um tópico específico
 
 kafka-console-producer --broker-list localhost:9092 --topic teste # produtor de mensagens em uma lista de servidores kafka para um tópico específico
 kafka-console-producer --broker-list localhost:9092 --topic teste --property parse.key=true --property key.separator=, # produtor com propriedades para parse de chave-valor e define separador com vírgula
 kafka-console-producer --broker-list localhost:9092,localhost:9093 --topic teste # produtor para 2 instancias, afim da segunda cobrir a falta da primeira
 
-kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic teste --from-beginning # consumidor mensagens em um servidor kafka de um tópico específico, desde o início
-kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic teste --group grupo1 # consumidor mensagens em grupo: se um consumer de um grupo recebe uma mensagem, os outros consumers deste mesmo grupo não recebem
-kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic teste --group grupo1 --property print.key=true --property key.separator=, # consumidor com propriedades para exibir chave e define separador com vírgula
+kafka-console-consumer --bootstrap-server localhost:9092 --topic teste --from-beginning # consumidor mensagens em um servidor kafka de um tópico específico, desde o início
+kafka-console-consumer --bootstrap-server localhost:9092 --topic teste --group grupo1 # consumidor mensagens em grupo: se um consumer de um grupo recebe uma mensagem, os outros consumers deste mesmo grupo não recebem
+kafka-console-consumer --bootstrap-server localhost:9092 --topic teste --group grupo1 --property print.key=true --property key.separator=, # consumidor com propriedades para exibir chave e define separador com vírgula
 
-kafka-consumer-groups.bat --bootstrap-server localhost:9092 --describe --group grupo1 # detalha o grupo e lista offset
-kafka-consumer-groups.bat --bootstrap-server localhost:9092 --execute --reset-offsets --to-earliest --topic teste:0 --group grupo1 # reseta o offset do grupo em tópico:partição para earliest
+kafka-consumer-groups --bootstrap-server localhost:9092 --list # lista os consumer groups
+kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group grupo1 # detalha o grupo e lista o offset
+kafka-consumer-groups --bootstrap-server localhost:9092 --execute --reset-offsets --to-earliest --topic teste:0 --group grupo1 # reseta o offset do grupo em tópico:partição para earliest
